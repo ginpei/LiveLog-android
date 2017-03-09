@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LiveLog</string>
+    <string name="preferences">Preferences</string>
 </resources>
