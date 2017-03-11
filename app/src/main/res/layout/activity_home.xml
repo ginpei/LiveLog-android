@@ -15,8 +15,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/chart"
+    <info.ginpei.livelog.views.SpiralView
+        android:id="@+id/spiral"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

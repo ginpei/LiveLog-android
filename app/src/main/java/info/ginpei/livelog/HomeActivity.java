@@ -7,42 +7,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-
-import java.util.ArrayList;
-import java.util.List;
+import info.ginpei.livelog.views.SpiralView;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private SpiralView spiralView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        LineChart chart = (LineChart) findViewById(R.id.chart);
-
-        int[] dataObjects = new int[] {
-                10,
-                11,
-                13,
-                9,
-                11
-        };
-
-        List<Entry> entries = new ArrayList<Entry>();
-
-        for (int i = 0; i < dataObjects.length; i++) {
-            entries.add(new Entry(i, dataObjects[i]));
-        }
-
-        LineDataSet dataSet = new LineDataSet(entries, "Label");
-
-        LineData lineData = new LineData(dataSet);
-        chart.setData(lineData);
-        chart.invalidate(); // refresh
+        spiralView = (SpiralView) findViewById(R.id.spiral);
+        spiralView.setRollings(3);
     }
 
     @Override
