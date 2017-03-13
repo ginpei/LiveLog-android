@@ -18,6 +18,9 @@ public class SpiralView extends View {
     private Path path;
 
     private int rollings = 1;
+    private int bgColor = Color.WHITE;
+    private int strokeColor = Color.RED;
+    private float startOffset = ((float) 2) / 5;
 
     public int getRollings() {
         return rollings;
@@ -28,14 +31,41 @@ public class SpiralView extends View {
         invalidate();
     }
 
+    public int getBgColor() {
+        return bgColor;
+    }
+
+    public void setBgColor(int bgColor) {
+        this.bgColor = bgColor;
+        invalidate();
+    }
+
+    public int getStrokeColor() {
+        return strokeColor;
+    }
+
+    public void setStrokeColor(int strokeColor) {
+        this.strokeColor = strokeColor;
+        invalidate();
+    }
+
+    public float getStartOffset() {
+        return startOffset;
+    }
+
+    public void setStartOffset(float startOffset) {
+        this.startOffset = startOffset;
+        invalidate();
+    }
+
     public SpiralView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
         bgPaint.setStyle(Paint.Style.FILL);
-        bgPaint.setColor(Color.WHITE);
+        bgPaint.setColor(bgColor);
 
         spiralPaint.setStyle(Paint.Style.STROKE);
-        spiralPaint.setColor(Color.RED);
+        spiralPaint.setColor(strokeColor);
         spiralPaint.setAntiAlias(true);
         spiralPaint.setStrokeCap(Paint.Cap.ROUND);
 //            spiralPaint.setStrokeJoin(Paint.Join.ROUND);  // not so effective?
@@ -46,7 +76,6 @@ public class SpiralView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         final int MIN_STROKE_WIDTH = 50;
-        final float startOffset = ((float) 2) / 5;
 
         super.onDraw(canvas);
 
