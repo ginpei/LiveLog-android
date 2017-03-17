@@ -1,11 +1,22 @@
 package info.ginpei.livelog.models;
 
+import java.util.Date;
+
 public class Event {
 
     public static final String TAG = "G#Event";
 
+    private Date date;
     private EventType type;
-    private String title;
+    private String title = "";
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public EventType getType() {
         return type;
@@ -23,12 +34,13 @@ public class Event {
         this.title = title;
     }
 
-    public Event(String typeKey) {
+    public Event(Date date, String typeKey) {
+        this.date = date;
         type = EventType.find(typeKey);
     }
 
-    public Event(String typeKey, String title) {
-        this(typeKey);
+    public Event(Date date, String typeKey, String title) {
+        this(date, typeKey);
         this.title = title;
     }
 }
