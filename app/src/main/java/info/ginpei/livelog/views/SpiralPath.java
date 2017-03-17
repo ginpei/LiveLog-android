@@ -96,7 +96,7 @@ public class SpiralPath extends Path {
     }
 
     public static class Configuration {
-        private static float fineness = TICKS_CIRCLE;  // same as ticks in one hour
+        private static float fineness = TICKS_CIRCLE;  // same as ticks in one day
         private float originX;
         private float originY;
         private float radius;
