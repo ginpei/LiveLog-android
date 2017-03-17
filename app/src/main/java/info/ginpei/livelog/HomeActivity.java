@@ -19,7 +19,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         spiralView = (SpiralView) findViewById(R.id.spiral);
-        spiralView.setRollings(3);
+        spiralView.invalidate();
     }
 
     @Override

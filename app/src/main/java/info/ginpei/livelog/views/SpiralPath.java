@@ -8,6 +8,8 @@ import info.ginpei.livelog.models.Event;
 
 public class SpiralPath extends Path {
 
+    public static final String TAG = "G#SpiralPath";
+
     public static final double DEGREE_CIRCLE = Math.PI * 2;
     public static final double DEGREE_OFFSET = DEGREE_CIRCLE / -4;  // start from 12 o'clock
     public static final int TICKS_CIRCLE = 24 * 4;
@@ -24,7 +26,7 @@ public class SpiralPath extends Path {
         this.ticksOffset = ticksOffset;
     }
 
-    private void generatePath() {
+    public void generatePath() {
         reset();
 
         double firstRadius = convertTickToRadius(ticksOffset);
@@ -49,7 +51,7 @@ public class SpiralPath extends Path {
     }
 
     private float calculateY(double radius, double degree) {
-        return (float) (configuration.getOriginX() + radius * Math.sin(degree));
+        return (float) (configuration.getOriginY() + radius * Math.sin(degree));
     }
 
     private float[] pos(float x0, float y0, float radius, float offsetStart, double wholeDegree, float progress) {
@@ -100,13 +102,17 @@ public class SpiralPath extends Path {
         return (int) ((to.getTime() - from.getTime()) / (15 * 60 * 1000));  // each 15 minutes
     }
 
+    public int getRollings() {
+        int ticks = countTicks(event.getDate(), end);
+        return ticks / (24 * 4);
+    }
+
     public static class Configuration {
         private static float fineness = TICKS_CIRCLE;  // same as ticks in one hour
         private float originX;
         private float originY;
         private float radius;
         private float radiusOffset;
-        private float rollings;
 
         // getters and setters
         // vvvvvvvvvvvvvvvvvvv
@@ -143,27 +149,14 @@ public class SpiralPath extends Path {
             this.radiusOffset = radiusOffset;
         }
 
-        public float getRollings() {
-            return rollings;
-        }
-
-        public void setRollings(float rollings) {
-            this.rollings = rollings;
-        }
-
         // ^^^^^^^^^^^^^^^^^^^
         // getters and setters
 
-        public Configuration(float originX, float originY, float radius, float radiusOffset, float rollings) {
+        public Configuration(float originX, float originY, float radius, float radiusOffset) {
             this.originX = originX;
             this.originY = originY;
             this.radius = radius;
             this.radiusOffset = radiusOffset;
-            this.rollings = rollings;
-        }
-
-        public float getWholeTicks() {
-            return fineness * rollings;
         }
 
         public static class Builder {
@@ -171,7 +164,6 @@ public class SpiralPath extends Path {
             private float originY;
             private float radius;
             private float radiusOffset;
-            private float rollings;
 
             public Builder setOriginX(float originX) {
                 this.originX = originX;
@@ -193,13 +185,8 @@ public class SpiralPath extends Path {
                 return this;
             }
 
-            public Builder setRollings(float rollings) {
-                this.rollings = rollings;
-                return this;
-            }
-
             public Configuration createData() {
-                return new Configuration(originX, originY, radius, radiusOffset, rollings);
+                return new Configuration(originX, originY, radius, radiusOffset);
             }
         }
     }

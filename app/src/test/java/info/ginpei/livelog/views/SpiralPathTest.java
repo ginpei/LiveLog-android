@@ -30,7 +30,6 @@ public class SpiralPathTest {
                 .setOriginY(100)
                 .setRadius(100)
                 .setRadiusOffset(50)
-                .setRollings(3)
                 .createData();
         event = new Event(simpleDateFormat.parse("2000-01-01 00:00:00"), "sleep");
         end = simpleDateFormat.parse("2000-01-01 08:00:00");
@@ -39,9 +38,11 @@ public class SpiralPathTest {
 
     @Test
     public void convertTickToDegree() throws Exception {
+        event.setDate(simpleDateFormat.parse("2000-01-01 00:00:00"));
+        path.end = simpleDateFormat.parse("2000-01-03 00:00:00");
+
         double expected;
         double actual;
-        configuration.setRollings(2);
 
         expected = Math.PI / -2;  // 12 o'clock
         actual = SpiralPath.convertTickToDegree(0);
@@ -80,7 +81,6 @@ public class SpiralPathTest {
     public void convertTickToRadius() throws Exception {
         configuration.setRadius(100);
         configuration.setRadiusOffset(50);
-        configuration.setRollings(2);
         path.event.setDate(simpleDateFormat.parse("2000-01-01 00:00:00"));
         path.end = simpleDateFormat.parse("2000-01-03 00:00:00");
 
