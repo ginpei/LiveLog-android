@@ -12,7 +12,8 @@ public class SpiralPath extends Path {
 
     public static final double DEGREE_CIRCLE = Math.PI * 2;
     public static final double DEGREE_OFFSET = DEGREE_CIRCLE / -4;  // start from 12 o'clock
-    public static final int TICKS_CIRCLE = 24 * 4;
+    public static final int TICKS_HOUR = 4;
+    public static final int TICKS_CIRCLE = 24 * TICKS_HOUR;
 
     public Configuration configuration;
     public Event event;
@@ -89,12 +90,12 @@ public class SpiralPath extends Path {
      * @return Ticks.
      */
     public static int countTicks(Date from, Date to) {
-        return (int) ((to.getTime() - from.getTime()) / (15 * 60 * 1000));  // each 15 minutes
+        return (int) ((to.getTime() - from.getTime()) / (60 / TICKS_HOUR * 60 * 1000));  // each 15 minutes
     }
 
     public int getRollings() {
         int ticks = countTicks(event.getDate(), end);
-        return ticks / (24 * 4);
+        return ticks / (24 * TICKS_HOUR);
     }
 
     public static class Configuration {
