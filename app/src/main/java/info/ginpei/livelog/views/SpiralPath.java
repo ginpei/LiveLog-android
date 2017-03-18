@@ -39,9 +39,11 @@ public class SpiralPath extends Path {
         int ticks = countTicks(event.getDate(), end);
         for (int i = 1; i < ticks; i++) {
             int tick = ticksOffset + i;
+            double radius = convertTickToRadius(tick);
+            double degree = convertTickToDegree(tick);
             lineTo(
-                    calculateX(convertTickToRadius(tick), convertTickToDegree(tick)),
-                    calculateY(convertTickToRadius(tick), convertTickToDegree(tick))
+                    calculateX(radius, degree),
+                    calculateY(radius, degree)
             );
         }
     }
